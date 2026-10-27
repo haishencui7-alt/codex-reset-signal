@@ -26,7 +26,7 @@ jobs:
       BOOTSTRAP_NOTIFY: "false"
       TARGET_TIMEZONE: ${{ vars.TARGET_TIMEZONE || 'Asia/Shanghai' }}
       SOURCE_TIMEZONE: ${{ vars.SOURCE_TIMEZONE }}
-      INCLUDE_MENTIONS: ${{ vars.INCLUDE_MENTIONS || 'true' }}
+      INCLUDE_MENTIONS: ${{ vars.INCLUDE_MENTIONS || 'false' }}
       WEBHOOK_DEBUG: ${{ vars.WEBHOOK_DEBUG || 'false' }}
       STATE_PATH: runtime/state.json
       PUBLIC_STATUS_PATH: runtime/status.json
@@ -62,6 +62,8 @@ jobs:
       - run: npm ci
       - name: Run monitor
         id: monitor
+        env:
+          SERVERCHAN_SENDKEY: ${{ secrets.SERVERCHAN_SENDKEY }}
         run: npm run monitor
       - name: Publish GitHub Actions summary
         if: always() && steps.monitor.outcome != 'skipped'

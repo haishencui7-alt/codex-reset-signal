@@ -25,6 +25,7 @@ export function loadConfig(env: NodeJS.ProcessEnv = process.env): AppConfig {
     sourceProvider,
     timezone: env.TARGET_TIMEZONE?.trim() || "Asia/Shanghai",
     sourceTimezone,
+    serverchanSendKey: env.SERVERCHAN_SENDKEY?.trim(),
     telegramBotToken: env.TELEGRAM_BOT_TOKEN?.trim(),
     telegramChatIds: splitList(env.TELEGRAM_CHAT_IDS),
     discordWebhookUrls: splitList(env.DISCORD_WEBHOOK_URLS),
@@ -61,6 +62,9 @@ export function validateConfig(
   if (!/^[A-Za-z0-9_]{1,15}$/.test(config.username)) {
     errors.push("X_USERNAME must be a valid X handle.");
   }
+
+  if (config.serverchanSendKey && !/^SCT[A-Za-z0-9_-]+$/.test(config.serverchanSendKey))
+    errors.push("SERVERCHAN_SENDKEY must be a valid SCT-prefixed ServerChan Turbo key.");
 
   const emailPartiallyConfigured =
     Boolean(config.resendApiKey || config.emailFrom || config.emailTo.length) &&

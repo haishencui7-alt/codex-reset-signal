@@ -97,6 +97,7 @@ export type PublicStatus = {
 export type AppConfig = {
   sourceProvider: "fxembed" | "x";
   timezone: string;
+  serverchanSendKey?: string;
   sourceTimezone?: string;
   telegramBotToken?: string;
   telegramChatIds: string[];

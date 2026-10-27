@@ -160,6 +160,54 @@ export function createTargets(
       }
       if (!response.ok) throw new Error(`SMS HTTP ${response.status}`);
     });
+  // Direct ServerChan Turbo (WeChat) channel. The SendKey is never logged.
+  // Only reset and additional bank-credit events are sent; uncertain chatter
+  // and bank-expiry notices are suppressed for this channel.
+  if (config.serverchanSendKey) {
+    const sendKey = config.serverchanSendKey;
+    add("serverchan", sendKey, async (item) => {
+      const relevant = item.events.filter(
+        (event) => event.type === "reset" || event.type === "bank_credit",
+      );
+      if (!relevant.length) return;
+      const completed = relevant.some(
+        (event) => event.type === "reset" && event.status === "completed",
+      );
+      const title = completed
+        ? "Tibo：Codex 额度已重置"
+        : "Tibo：Codex 额度变更或重置预告";
+      let response: Response;
+      try {
+        response = await fetcher(
+          `https://sctapi.ftqq.com/${encodeURIComponent(sendKey)}.send`,
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded; charset=utf-8" },
+            body: new URLSearchParams({
+              title,
+              desp: renderText(item.post, relevant, config.timezone),
+            }).toString(),
+            signal: AbortSignal.timeout(20_000),
+            redirect: "error",
+          },
+        );
+      } catch {
+        throw new Error("ServerChan request failed or timed out");
+      }
+      if (!response.ok)
+        throw new Error(`ServerChan HTTP ${response.status}`);
+      let result: unknown;
+      try {
+        result = await response.json();
+      } catch {
+        throw new Error("Invalid ServerChan response");
+      }
+      if (
+        !result || typeof result !== "object" ||
+        !("code" in result) || result.code !== 0
+      ) throw new Error("ServerChan rejected notification");
+    });
+  }
   for (const chat of config.telegramChatIds)
     add(
       "telegram",
