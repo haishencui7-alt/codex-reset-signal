@@ -3,11 +3,11 @@
   "username": "thsottiaux",
   "keyword": "reset",
   "userId": "1953337039510003712",
-  "sinceId": "2120021043876106429",
-  "lastCheckedAt": "2026-11-10T15:44:29.430Z",
-  "lastSuccessAt": "2026-11-10T15:44:29.430Z",
-  "lastRunStatus": "checked-0-posts",
-  "postsScanned": 155,
+  "sinceId": "2120266880963473789",
+  "lastCheckedAt": "2026-11-10T21:27:49.665Z",
+  "lastSuccessAt": "2026-11-10T21:27:49.665Z",
+  "lastRunStatus": "checked-1-posts",
+  "postsScanned": 156,
   "matches": [],
   "outbox": [],
   "seen": {
@@ -165,15 +165,24 @@
     "2119532403593191733": "8f6d3dfd8382d776462fd8fcefcf16fbeb244ae3d2cabe5e2a25643302da87f0",
     "2119611877810639072": "9a693cf09967be78d16422b13de22b648726dbdebc10c4bb56e9780db1efd7d7",
     "2120018604691521609": "34fe16711376cb1ae9a12a1a6e9e29ca058295a86a14c7c52e77bc9e31250c8a",
-    "2120021043876106429": "9729ed332d21a6bd0687726475e22aa2bf00aa775f67e844b063d56398d5f0a7"
+    "2120021043876106429": "9729ed332d21a6bd0687726475e22aa2bf00aa775f67e844b063d56398d5f0a7",
+    "2120266880963473789": "55fdafb671bfdb33a4bbb331e012b450f24f970e98d6d12e60ffd56361f86e4a"
   },
   "latestObservedPost": {
-    "id": "2120021043876106429",
-    "canonicalId": "2120021043876106429",
-    "text": "Dots can now control many machines in addition to its own little cloud computer that we provide by default.",
-    "createdAt": "2026-11-10T05:09:39.000Z",
-    "url": "https://x.com/thsottiaux/status/2120021043876106429",
-    "media": []
+    "id": "2120266880963473789",
+    "canonicalId": "2120266880963473789",
+    "text": "Labs innovating together ftw https://t.co/WnRpl5WpUw",
+    "createdAt": "2026-11-10T21:26:31.000Z",
+    "url": "https://x.com/thsottiaux/status/2120266880963473789",
+    "media": [
+      {
+        "mediaKey": "2120266869978607616",
+        "type": "photo",
+        "url": "https://pbs.twimg.com/media/HWyzfA4asAAgjNy.jpg?name=orig",
+        "previewImageUrl": null,
+        "altText": null
+      }
+    ]
   },
   "eventParserVersion": 5
 }
